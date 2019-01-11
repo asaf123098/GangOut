@@ -1,5 +1,6 @@
 package com.gangout;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +23,9 @@ public class WelcomeScreen extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view.getId() == goToRegisterButton.getId()) {
+            Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
             Intent goToRegisterIntent = new Intent(this, RegisterScreen.class);
-            startActivity(goToRegisterIntent);
-            finish();
+            startActivity(goToRegisterIntent, bundle);
         }
     }
 }
