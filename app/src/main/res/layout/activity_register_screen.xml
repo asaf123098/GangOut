@@ -35,13 +35,8 @@
         android:layout_marginTop="20dp"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/register_button"
         android:text="@string/register"
-        android:textAllCaps="false"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:background="@drawable/register_button"
-        android:textColor="#ffffff"
-        android:textSize="20sp"/>
+        style="@style/cyanButtons"/>
 </LinearLayout>

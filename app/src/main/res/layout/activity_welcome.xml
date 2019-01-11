@@ -19,14 +19,8 @@
 
     <Button
         android:id="@+id/go_to_register_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/click_here_to_register"
-        android:textSize="20sp"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:background="@drawable/register_button"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="200dp"
+        style="@style/cyanButtons"/>
 
 </LinearLayout>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">GangOut</string>
-    <string name="welcome_to_gangout">Welcome to GanOut!</string>
+    <string name="welcome_to_gangout">Welcome to GangOut!</string>
     <string name="click_here_to_register">Click here to register</string>
     <string name="please_enter_your_details">Please enter your details:</string>
     <string name="username">Username</string>
