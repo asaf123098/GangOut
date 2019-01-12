@@ -2,9 +2,13 @@ package com.gangout;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import java.util.concurrent.TimeUnit;
 
 public class RegisterScreen extends Activity {
 
@@ -19,7 +23,9 @@ public class RegisterScreen extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
+        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
+        Intent goToRegisterIntent = new Intent(this, WelcomeScreen.class);
+        startActivity(goToRegisterIntent, bundle);
         return true;
 
     }

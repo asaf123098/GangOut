@@ -10,7 +10,8 @@
         android:supportsRtl="true">
         <activity
             android:name=".WelcomeScreen"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,9 @@
         </activity>
         <activity
             android:name=".RegisterScreen"
-            android:theme="@style/TransitionTheme"></activity>
+            android:theme="@style/TransitionTheme"
+            android:screenOrientation="sensorPortrait">
+        </activity>
     </application>
 
 </manifest>
