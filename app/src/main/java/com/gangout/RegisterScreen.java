@@ -49,8 +49,10 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
 
         this.requestQueue = Volley.newRequestQueue(this);
         String url = "http://192.168.1.26/add_user.php";
+        String urlDad= "http://192.168.2.144:81/add_user.php";
 
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, urlDad, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -73,12 +75,12 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
                     }
                 });
 
-        registerUser = new JsonObjectRequest(Request.Method.POST, url, this.user_credentials, new Response.Listener<JSONObject>() {
+        registerUser = new JsonObjectRequest(Request.Method.POST, urlDad, this.user_credentials, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     Log.i("tostring***", response.toString());
-                    Toast.makeText(getApplicationContext(), "Username is: " + response.getString("username"), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Username is: " + response.getString("name"), Toast.LENGTH_LONG).show();
                     Toast.makeText(getApplicationContext(), "Password is: " + response.getString("password"), Toast.LENGTH_LONG).show();
 
                 } catch (JSONException e) {
@@ -92,6 +94,22 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
                 Log.d("Response error: ", "error message: " + error.getMessage());
             }
         });
+
+        StringRequest getString = new StringRequest(Request.Method.GET, urlDad,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        Toast.makeText(getApplicationContext(),"Response is: "+ response, Toast.LENGTH_LONG).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("response error","That didn't work!");
+            }
+        });
+
+        requestQueue.add(registerUser);
     }
 
 
