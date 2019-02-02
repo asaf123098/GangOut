@@ -23,6 +23,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class RegisterScreen extends Activity implements View.OnClickListener {
 
@@ -31,9 +34,8 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
     private Button registerButton;
 
     private RequestQueue requestQueue;
-    private JsonObjectRequest registerUser;
-    private JSONObject user_credentials = new JSONObject();
-
+    private CustomRequest registerUser;
+    private Map<String, String> user_credentials = new HashMap<String, String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
 
         this.requestQueue = Volley.newRequestQueue(this);
         String url = "http://192.168.1.26/add_user.php";
-        String urlDad= "http://192.168.2.144:81/add_user.php";
+        String urlDad= "http://192.168.2.142:81/add_user.php";
 
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, urlDad, null,
@@ -75,12 +77,12 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
                     }
                 });
 
-        registerUser = new JsonObjectRequest(Request.Method.POST, urlDad, this.user_credentials, new Response.Listener<JSONObject>() {
+        registerUser = new CustomRequest(Request.Method.POST, urlDad, this.user_credentials, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     Log.i("tostring***", response.toString());
-                    Toast.makeText(getApplicationContext(), "Username is: " + response.getString("name"), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Username is: " + response.getString("username"), Toast.LENGTH_LONG).show();
                     Toast.makeText(getApplicationContext(), "Password is: " + response.getString("password"), Toast.LENGTH_LONG).show();
 
                 } catch (JSONException e) {
@@ -91,21 +93,6 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("Response error: ", "error message: " + error.toString());
-                Log.d("Response error: ", "error message: " + error.getMessage());
-            }
-        });
-
-        StringRequest getString = new StringRequest(Request.Method.GET, urlDad,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Toast.makeText(getApplicationContext(),"Response is: "+ response, Toast.LENGTH_LONG).show();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("response error","That didn't work!");
             }
         });
 
@@ -128,14 +115,8 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
         {
             String username = this.userName.getText().toString();
             String password = this.passWord.getText().toString();
-            try {
-                this.user_credentials.put("username", username);
-                this.user_credentials.put("password", password);
-            }
-            catch (JSONException e)
-            {
-                e.printStackTrace();
-            }
+            this.user_credentials.put("username", username);
+            this.user_credentials.put("password", password);
             Toast.makeText(getApplicationContext(), "Registering...", Toast.LENGTH_SHORT).show();
             this.requestQueue.add(registerUser);
         }
