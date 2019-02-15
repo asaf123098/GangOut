@@ -77,26 +77,7 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
                     }
                 });
 
-        registerUser = new CustomRequest(Request.Method.POST, urlDad, this.user_credentials, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    Log.i("tostring***", response.toString());
-                    Toast.makeText(getApplicationContext(), "Username is: " + response.getString("username"), Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(), "Password is: " + response.getString("password"), Toast.LENGTH_LONG).show();
 
-                } catch (JSONException e) {
-                    Log.e("Caught exception: ", e.getMessage());
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Response error: ", "error message: " + error.toString());
-            }
-        });
-
-        requestQueue.add(registerUser);
     }
 
 
@@ -118,7 +99,8 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
             this.user_credentials.put("username", username);
             this.user_credentials.put("password", password);
             Toast.makeText(getApplicationContext(), "Registering...", Toast.LENGTH_SHORT).show();
-            this.requestQueue.add(registerUser);
+
+            DBUtils.RegisterNewUser(username, password, this.requestQueue);
         }
     }
 }
