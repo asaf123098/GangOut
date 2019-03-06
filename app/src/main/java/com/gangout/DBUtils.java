@@ -29,6 +29,14 @@ public class DBUtils {
         registerUser = new CustomRequest(Request.Method.POST, url, user_credentials, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                try {
+                    Log.d("user", response.getString("username"));
+                    Log.d("password", response.getString("password"));
+                }
+                catch (JSONException e)
+                {
+                    Log.e("Response json exception", e.getMessage());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
