@@ -18,7 +18,8 @@ import java.util.Map;
 public class DBUtils {
 
     public static void RegisterNewUser(String username, String password, RequestQueue requestQueue) {
-        String url = "http://192.168.1.28/add_user.php";
+        String url = String.format("http://%s/add_user.php", RegisterScreen.ipAddress);
+        Log.d("ip", url);
         CustomRequest registerUser;
 
         Map<String, String> user_credentials = new HashMap<String, String>();
