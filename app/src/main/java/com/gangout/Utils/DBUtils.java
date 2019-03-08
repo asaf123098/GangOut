@@ -19,20 +19,7 @@ public class DBUtils {
         CustomRequest registerUser;
 
         registerUser = new CustomRequest(method, url, values_map,
-                DBUtils.getResponseListener(),
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        String errorString;
-
-                        if (error.networkResponse != null)
-                            errorString =  new String(error.networkResponse.data, StandardCharsets.UTF_8);
-                        else
-                            errorString = error.getMessage();
-                        Log.d("Response error",errorString);
-
-                    }
-                });
+                DBUtils.getResponseListener(), DBUtils.getResponseErrorListener());
 
         requestQueue.add(registerUser);
     }
@@ -57,13 +44,14 @@ public class DBUtils {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Response error", DBUtils.parseErrorData(error));
+                String errorString;
+
+                if (error.networkResponse != null)
+                    Log.d("Response error data", new String(error.networkResponse.data, StandardCharsets.UTF_8));
+                else
+                    Log.d("Response error message", error.getMessage());
+
             }
         };
-    }
-
-    private static String parseErrorData(VolleyError error)
-    {
-        return new String(error.networkResponse.data, StandardCharsets.UTF_8);
     }
 }
