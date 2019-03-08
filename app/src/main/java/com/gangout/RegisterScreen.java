@@ -8,7 +8,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +17,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.gangout.Utils.DBUtils;
+import com.gangout.Utils.UserUtils;
 
 public class RegisterScreen extends Activity implements View.OnClickListener {
 
@@ -26,7 +27,7 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
     private Button registerButton;
 
     private RequestQueue requestQueue;
-    public static String ipAddress = "192.168.2.142";
+    public static String ipAddress = "192.168.2.142:81";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
                 builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Dialog dialog = Dialog.class.cast(dialogInterface);
+                        Dialog dialog = (Dialog)dialogInterface;
                         EditText ip_box = (EditText) dialog.findViewById(R.id.ip_box);
                         RegisterScreen.ipAddress = ip_box.getText().toString();
                     }});
@@ -92,7 +93,7 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
             String username = this.userName.getText().toString();
             String password = this.passWord.getText().toString();
             Toast.makeText(getApplicationContext(), "Registering...", Toast.LENGTH_SHORT).show();
-            DBUtils.RegisterNewUser(username, password, this.requestQueue);
+            UserUtils.RegisterNewUser(username, password, this.requestQueue);
         }
     }
 }
