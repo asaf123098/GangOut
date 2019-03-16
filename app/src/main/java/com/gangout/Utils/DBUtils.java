@@ -14,29 +14,14 @@ import java.util.Map;
 
 public class DBUtils {
 
-    public static void sendRequest(int method, String url, Map<String, String> values_map, RequestQueue requestQueue)
+    public static void sendRequest(int method, String url, Map<String, String> values_map, Response.Listener<JSONObject> responseListener)
     {
         CustomRequest registerUser;
 
         registerUser = new CustomRequest(method, url, values_map,
-                DBUtils.getResponseListener(), DBUtils.getResponseErrorListener());
+                responseListener, DBUtils.getResponseErrorListener());
 
-        requestQueue.add(registerUser);
-    }
-
-    private static Response.Listener<JSONObject> getResponseListener()
-    {
-        return new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    Log.d("user", response.getString("username"));
-                    Log.d("password", response.getString("password"));
-                } catch (JSONException e) {
-                    Log.e("Response json exception", e.getMessage());
-                }
-            }
-        };
+        SingletonRequestQueue.getInstance(null).add(registerUser);
     }
 
     private static Response.ErrorListener getResponseErrorListener()

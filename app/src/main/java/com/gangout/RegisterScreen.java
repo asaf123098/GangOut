@@ -8,6 +8,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.SingleLineTransformationMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,10 +17,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.gangout.Utils.DBUtils;
+import com.gangout.Utils.SingletonRequestQueue;
 import com.gangout.Utils.UserUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterScreen extends Activity implements View.OnClickListener {
 
@@ -26,8 +38,9 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
     private EditText passWord;
     private Button registerButton;
 
-    private RequestQueue requestQueue;
-    public static String ipAddress = "192.168.2.142:81";
+//    public static String ipAddress = "192.168.2.142:81";
+    public static String ipAddress = "192.168.1.26:80";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +54,7 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
         this.passWord = (EditText) findViewById(R.id.register_password);
         this.registerButton = (Button) findViewById(R.id.register_button);
         this.registerButton.setOnClickListener(this);
-
-        this.requestQueue = Volley.newRequestQueue(this);
+        SingletonRequestQueue.getInstance(this);
     }
 
     @Override
@@ -93,7 +105,7 @@ public class RegisterScreen extends Activity implements View.OnClickListener {
             String username = this.userName.getText().toString();
             String password = this.passWord.getText().toString();
             Toast.makeText(getApplicationContext(), "Registering...", Toast.LENGTH_SHORT).show();
-            UserUtils.RegisterNewUser(username, password, this.requestQueue);
+            UserUtils.RegisterNewUser(username, password);
         }
     }
 }
