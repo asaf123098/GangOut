@@ -19,7 +19,7 @@ public class ServerResponseNotifier {
         if (somethingHappened)
         {
             // Signal the even by invoking the interface's method.
-            ie.Ser ();
+            ie.GetServerResponse ();
         }
         //...
     }

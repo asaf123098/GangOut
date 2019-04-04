@@ -7,20 +7,24 @@
     android:orientation="vertical"
     tools:context=".WelcomeScreen">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcome_to_gangout"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/welcome_to_gangout"-->
+        <!--android:textSize="30sp"-->
+        <!--android:textColor="@color/black"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--/>-->
 
-    <Button
-        android:id="@+id/go_to_register_bt"
-        android:text="@string/click_here_to_register"
-        android:layout_marginTop="200dp"
-        style="@style/cyanButtons"/>
-
+    <!--<Button-->
+        <!--android:id="@+id/go_to_register_bt"-->
+        <!--android:text="@string/click_here_to_register"-->
+        <!--android:layout_marginTop="200dp"-->
+        <!--style="@style/cyanButtons"/>-->
+    <WebView
+        android:layout_height="500dp"
+        android:layout_width="match_parent"
+        android:id="@+id/web_view">
+    </WebView>
 </LinearLayout>

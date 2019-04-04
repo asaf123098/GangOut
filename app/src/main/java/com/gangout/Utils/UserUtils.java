@@ -51,7 +51,8 @@ public class UserUtils {
                 try {
                     if (response.getBoolean("exists"))
                     {
-                        userExists =
+//                        userExists =
+                        int a = 1;
                     }
 
 
