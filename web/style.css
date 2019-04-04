@@ -1,0 +1,45 @@
+body
+{
+    background: rgb(129, 129, 129);
+}
+
+h1
+{
+    text-align: center;
+    font-family : "Arial";
+    font-weight: 1000;
+    color: rgb(78, 87, 79);
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+input[cat="user_credentials"]
+{
+    display: block;    
+    margin: 0px auto 50px auto ;
+    font-size: 1.4em;
+    background: rgb(91, 92, 97);
+    color: rgb(71, 170, 5);
+    border-radius: 20px;
+    padding: 15px;
+    border:none;
+}
+input[cat="user_credentials"]::placeholder
+{
+    color: rgb(71, 170, 5);
+    font-size: 1.3em;
+    font-weight: bold;
+}
+#register_button
+{    
+    width:50%;
+    margin:auto;
+    text-align: center;
+    font-family : "Arial";
+    font-weight: bolder;
+    color: rgb(71, 170, 5);
+    font-size: 30px;
+    background: rgb(54, 61, 99);
+    margin-bottom: 50px;   
+    padding: 20px;
+    border-radius: 30px;
+}
